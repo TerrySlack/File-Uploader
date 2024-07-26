@@ -10,10 +10,9 @@ import {
   checkFile,
 } from "../utils/processUploadedFiles";
 
-import { IStore, IFileUploaderProps, IFileUploaderHook, FileData } from "./types";
-
 import { createObservable } from "../utils/Observables";
 import { useCustomCallback } from "./useCustomCallback";
+import { IStore, IFileUploaderProps, IFileUploaderHook, FileData } from "../types/types";
 
 const store: IStore = {};
 export const useFileUploader = ({
@@ -39,7 +38,7 @@ export const useFileUploader = ({
         : "";
       setState();
     },
-    [cacheId, store],
+    [cacheId, setState],
   );
   const setMaximumFileSizeExceeded = useCallback(
     (status = false) => {
@@ -50,7 +49,7 @@ export const useFileUploader = ({
         : "";
       setState();
     },
-    [cacheId, store],
+    [cacheId, setState],
   );
 
   const processFiles = useCustomCallback(
@@ -119,7 +118,7 @@ export const useFileUploader = ({
       const updatedValidFiles = validFiles.getState().filter((_: FileData, i: number) => i !== index);
       validFiles.next(updatedValidFiles);
     },
-    [store, cacheId],
+    [cacheId],
   );
 
   const onIdChange = useCallback(
@@ -136,7 +135,7 @@ export const useFileUploader = ({
       });
       validFiles.next(updatedValidFiles);
     },
-    [store, cacheId, checkFile],
+    [cacheId],
   );
 
   const onDrop = useCustomCallback(
@@ -178,27 +177,24 @@ export const useFileUploader = ({
     validFiles.next([]);
     invalidFiles.next([]);
     setState();
-  }, [store, cacheId]);
+  }, [cacheId, setState]);
 
-  const clearCache = useCallback(
-    (cacheId: string | number) => {
-      delete store[cacheId];
-    },
-    [store],
-  );
+  const clearCache = useCallback((cacheId: string | number) => {
+    delete store[cacheId];
+  }, []);
 
   const getFilesOnly = useCallback(() => {
     const { validFiles } = store[cacheId];
     return validFiles?.getState().map(({ file }: FileData) => file);
-  }, [store, cacheId]);
+  }, [cacheId]);
 
   //Subcribe to the observable
   useEffect(() => {
-    if (!Boolean(cacheId) || !Boolean(maximumUploadCount)) return undefined;
+    if (!cacheId || !maximumUploadCount) return undefined;
 
     const subject = store[cacheId];
     //Check to see if the observable is in the store.  If not, add it
-    if (!Boolean(subject) && Boolean(maximumUploadCount)) {
+    if (!subject && Boolean(maximumUploadCount)) {
       store[cacheId] = {
         maximumUploadCount,
         maximumFileSize,
@@ -222,7 +218,7 @@ export const useFileUploader = ({
       validFilesUnsubscribe();
       invalidFilesUnsubscribe();
     };
-  }, []);
+  }, [cacheId, maximumFileSize, maximumUploadCount, setState]);
 
   return {
     validFiles: store[cacheId]?.validFiles?.getState() ?? [],

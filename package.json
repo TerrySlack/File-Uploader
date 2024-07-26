@@ -1,18 +1,18 @@
 {
-  "name": "@mainframework/api-reqpuest-provider-worker-hook",
-  "version": "2.2.5",
-  "description": "Package to handle api requests with a hook, provider and web worker",
+  "name": "@mainframework/file-upload",
+  "version": "1.0.0",
+  "description": "Package to handle the selection of files for upload",
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
   "types": "./dist/esm/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/TerrySlack/mainframework-api-hook-provider-worker.git"
+    "url": ""
   },
   "bugs": {
-    "url": "https://github.com/TerrySlack/mainframework-api-hook-provider-worker/issues"
+    "url": ""
   },
-  "homepage": "https://github.com/TerrySlack/mainframework-api-hook-provider-worker#readme",
+  "homepage": "",
   "scripts": {
     "husky": "husky",
     "clean": "rimraf dist",

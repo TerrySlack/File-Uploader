@@ -1,75 +1,58 @@
-import { Dispatch, SetStateAction, ReactNode } from "react";
+import { ChangeEvent, DragEvent } from "react";
+import { IObservable } from "../utils/Observables";
 
-export interface Config {
-  cacheName: string | number;
-  data?: unknown;
-  mergeExisting?: boolean;
-  run?: boolean;
-  runOnce?: boolean; //Only run the query once Remove the task from the queue as I'm doing now.
-  runAuto?: boolean; //Run the query, without having to use the returned function
-  reset?: Reset;
-}
-
-export type ConfigWithId = Config & {
-  id?: string;
-};
-export interface RequestConfig {
+export interface FileData {
+  id: string;
+  file: File | Blob;
   url: string;
-  method: "GET" | "get" | "POST" | "post" | "PATCH" | "patch" | "DELETE" | "delete";
-  mode?: "cors" | "no-cors" | undefined;
-  body?: unknown;
-  headers?: object;
-  credentials?: "include" | "same-origin" | "omit" | undefined;
+  type: string;
 }
 
-export interface QueryConfig {
-  requestConfig?: RequestConfig;
-  queryConfig: ConfigWithId;
-  returnPromise?: boolean;
-}
-export type WorkerConfig = RequestConfig &
-  Omit<ConfigWithId, "runAuto"> & {
-    id?: string;
-  };
-
-export interface QueueContextType {
-  addToQueue: (
-    config: ConfigWithId,
-    requestQueryConfig?: RequestConfig,
-    callback?: (data: Dispatch<SetStateAction<undefined>> | unknown) => void,
-  ) => void;
+export interface ErrorMessage {
+  status: boolean;
+  message: string;
 }
 
-export interface WorkerProvider {
-  children: ReactNode;
-}
-// Define types for task and task queue
-export interface Task {
-  callback: (data: unknown) => void;
-}
+export type IFileUploaderHook = {
+  validFiles: FileData[];
+  invalidFiles: File[];
+  maximumUploadsExceeded: ErrorMessage;
+  maximumFileSizeExceeded: ErrorMessage;
+  onInputChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  onDragOver: (e: DragEvent<HTMLButtonElement>) => void;
+  onDrop: (e: DragEvent<HTMLButtonElement>) => void;
+  onDragEnter: (e: DragEvent<HTMLButtonElement>) => void;
+  onDragLeave: (e: DragEvent<HTMLButtonElement>) => void;
+  onIdChange: (index: number, id: string) => void;
+  onRemoveFile: (index: number) => void;
+  onCancel: () => void;
+  processFiles: (file: File[]) => void;
+  clearCache: (cacheId: string | number) => void;
+  getFilesOnly: () => (File | Blob)[];
+  setMaximumUploadsExceeded: (status?: boolean) => void;
+  setMaximumFileSizeExceeded: (status?: boolean) => void;
+};
 
-export interface TaskQueue {
-  [id: string | number]: Task;
-}
-
-export interface StoreSubject {
-  name: string | number;
-  lock: boolean;
-  value: unknown;
-  subscribers: ((data: unknown) => void)[];
-  next: (value: unknown) => void;
-  subscribe: (subscriber: (data: unknown) => void) => () => void;
-}
-
-export interface StoreSubjects {
-  [cacheName: string | number]: StoreSubject;
-}
-
-export interface ResetConfig {
-  cacheName: string;
-  placeHolderData: unknown;
+export interface IFileUploaderProps {
+  cacheId: string | number;
+  maximumUploadCount?: number;
+  maximumFileSize?: number;
+  acceptedTypes?: Record<string, string>;
 }
 
-export type Queue<T> = Record<string, T>;
+export interface IStoreEntry {
+  maximumUploadCount: number | undefined;
+  maximumFileSize: number;
+  maxUploadError: ErrorMessage;
+  maxFileSizeError: ErrorMessage;
+  validFiles: IObservable<FileData[]>;
+  invalidFiles: IObservable<File[]>;
+}
 
-export type Reset = string | ResetConfig;
+export interface IStore {
+  [cacheName: string | number]: IStoreEntry;
+}
+
+export interface IFileUpload {
+  cacheId: string;
+}
