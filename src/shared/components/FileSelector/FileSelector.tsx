@@ -1,7 +1,7 @@
 import { RefCallback, useEffect, useRef } from "react";
 import { FileSelectorProps } from "../../types/types";
 
-import "../../../tailwind.css";
+import "./tailwind.css";
 export const FileSelector = ({
   inputId,
   messageParagraph,
