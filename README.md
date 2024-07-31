@@ -1,4 +1,4 @@
-### A React package, that allows for the selection of files, through drag and drop or the File Dialog api
+### A React package, that allows for the selection of files, through drag and drop or the File Dialog api. Re-rendering is kept to a minimum, helping with application performance
 
 ### Installation:
 
