@@ -172,6 +172,16 @@ export const useFileSelector = ({
     }, 200);
   }, []);
 
+  const FileSelectorRef = useRef(() => (
+    <FileSelector
+      onChange={onInputChange}
+      onDragOver={onDragOver}
+      onDrop={onDrop}
+      onDragEnter={onDragEnter}
+      onDragLeave={onDragLeave}
+    />
+  ));
+
   return {
     //Properties
     validFiles,
@@ -187,14 +197,6 @@ export const useFileSelector = ({
     setMaximumUploadsExceeded,
 
     //Component - Export the FileSelector
-    FileSelector: () => (
-      <FileSelector
-        onChange={onInputChange}
-        onDragOver={onDragOver}
-        onDrop={onDrop}
-        onDragEnter={onDragEnter}
-        onDragLeave={onDragLeave}
-      />
-    ),
+    FileSelector: FileSelectorRef.current,
   };
 };
