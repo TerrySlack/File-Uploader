@@ -1,7 +1,7 @@
 {
   "name": "@mainframework/dropzone",
-  "version": "0.0.1",
-  "description": "Package to handle the selection of files for upload",
+  "version": "1.0.1",
+  "description": "A file selection package, without all of the re-rendering issues that come with other dropzone packages",
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
   "types": "./dist/esm/index.d.ts",
@@ -37,7 +37,9 @@
   "keywords": [
     "react",
     "typescript",
-    "awesome-project"
+    "file selection",
+    "file dialog",
+    "dropzone"
   ],
   "author": "Terry Slack",
   "license": "MIT",
