@@ -1,18 +1,18 @@
 {
-  "name": "@mainframework/file-upload",
-  "version": "1.0.0",
+  "name": "@mainframework/dropzone",
+  "version": "0.0.1",
   "description": "Package to handle the selection of files for upload",
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
   "types": "./dist/esm/index.d.ts",
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "git+https://github.com/TerrySlack/mainframework-dropzone.git"
   },
   "bugs": {
-    "url": ""
+    "url": "https://github.com/TerrySlack/mainframework-dropzone/issues"
   },
-  "homepage": "",
+  "homepage": "https://github.com/TerrySlack/mainframework-dropzone#readme",
   "scripts": {
     "build:css:dev": "npx tailwindcss -i ./src/index.css -o ./src/tailwind.css --watch",
     "build:css:prod": "npx tailwindcss -i ./src/index.css -o ./src/tailwind.css --minify ",
