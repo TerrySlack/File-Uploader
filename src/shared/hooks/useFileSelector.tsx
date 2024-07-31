@@ -128,7 +128,7 @@ export const useFileSelector = ({
     SetValidFiles(updatedValidFiles);
   }, []);
 
-  const onInputChange = useCustomCallback(
+  const onInputChange = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
       const files = Array.from(event.target.files || []);
       processFiles(files);
@@ -138,7 +138,7 @@ export const useFileSelector = ({
 
   //Drag and Drop
 
-  const onDrop = useCustomCallback(
+  const onDrop = useCallback(
     (e: DragEvent<HTMLButtonElement>) => {
       e.preventDefault();
       processFiles(Array.from(e.dataTransfer.files));
@@ -146,19 +146,19 @@ export const useFileSelector = ({
     [processFiles],
   );
 
-  const onDragOver = useCustomCallback((e: DragEvent<HTMLButtonElement>) => {
+  const onDragOver = useCallback((e: DragEvent<HTMLButtonElement>) => {
     e.preventDefault();
     e.dataTransfer.dropEffect = "copy";
   }, []);
 
-  const onDragEnter = useCustomCallback((e: DragEvent<HTMLButtonElement>) => {
+  const onDragEnter = useCallback((e: DragEvent<HTMLButtonElement>) => {
     e.preventDefault();
     const { classList } = e.currentTarget;
     classList.add("border-yellow-400");
     classList.remove("border-silver-600");
   }, []);
 
-  const onDragLeave = useCustomCallback((e: DragEvent<HTMLButtonElement>) => {
+  const onDragLeave = useCallback((e: DragEvent<HTMLButtonElement>) => {
     e.preventDefault();
     const currentTarget = e.currentTarget;
 
@@ -193,6 +193,10 @@ export const useFileSelector = ({
     onCancel,
     onIdChange,
     onRemoveFile,
+
+    //Errors
+    maxUploadError: maxUploadErrorRef.current,
+    maxFileSizeError: maxFileSizeErrorRef.current,
     setMaximumFileSizeExceeded,
     setMaximumUploadsExceeded,
 
