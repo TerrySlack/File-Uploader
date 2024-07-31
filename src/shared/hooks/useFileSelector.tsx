@@ -193,6 +193,10 @@ export const useFileSelector = ({
     onCancel,
     onIdChange,
     onRemoveFile,
+
+    //Errors
+    maxUploadError: maxUploadErrorRef.current,
+    maxFileSizeError: maxFileSizeErrorRef.current,
     setMaximumFileSizeExceeded,
     setMaximumUploadsExceeded,
 
