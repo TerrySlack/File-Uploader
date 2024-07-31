@@ -1,6 +1,6 @@
 {
   "name": "@mainframework/dropzone",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Package to handle the selection of files for upload",
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
