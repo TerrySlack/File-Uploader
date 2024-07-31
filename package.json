@@ -1,6 +1,6 @@
 {
   "name": "@mainframework/file-upload",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Package to handle the selection of files for upload",
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
