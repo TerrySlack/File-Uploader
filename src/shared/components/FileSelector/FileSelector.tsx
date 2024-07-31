@@ -1,4 +1,4 @@
-import { RefCallback, useEffect, useRef } from "react";
+import { RefCallback, useEffect, useRef, MouseEvent } from "react";
 import { FileSelectorProps } from "../../types/types";
 
 import "./tailwind.css";
@@ -20,7 +20,8 @@ export const FileSelector = ({
   const refCallback: RefCallback<HTMLInputElement> = (ref) => {
     fileInputRef.current = ref;
   };
-  const dropZoneButtonClickRef = useRef(() => {
+  const dropZoneButtonClickRef = useRef((e: MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
     fileInputRef.current?.click();
   });
 
@@ -59,6 +60,7 @@ export const FileSelector = ({
   return (
     <div className={dropZoneWrapperClassNameRef.current} draggable={false}>
       <button
+        type="button"
         className={clickableAreaClassNameRef.current}
         onDragOver={onDragOver}
         onDrop={onDrop}
