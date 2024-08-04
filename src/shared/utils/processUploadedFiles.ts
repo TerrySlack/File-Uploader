@@ -24,6 +24,9 @@ export const checkFilesMaximumSize = (files: (File | Blob)[], maxFileSize = maxi
   files.every((file) => hasSurpassedMaxSize(file, maxFileSize));
 
 export const createUrlString = (file: File) => URL.createObjectURL(file);
+export const clearBlobFromMemory = (url: string) => {
+  URL.revokeObjectURL(url);
+};
 
 const createDocumentData = (file: File, allowableTypes = defaultTypeExtensions) => ({
   id: file.name.split(".")[0],

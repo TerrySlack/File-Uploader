@@ -9,6 +9,7 @@ import {
   isValidFileType,
   SvgXmlnsAttributeCheck,
   checkFile,
+  clearBlobFromMemory,
 } from "../utils/processUploadedFiles";
 
 import { useCustomCallback } from "./useCustomCallback";
@@ -51,9 +52,9 @@ export const useFileSelector = ({
     setUpdateTrigger((state) => (state += 1));
   }, []);
 
-  //Callbacks
-
   const clearCache = useCallback(() => {
+    //Clear any blobs held in memor
+    clearBlobs();
     SetInvalidFiles([]);
     SetValidFiles([]);
   }, []);
@@ -111,7 +112,16 @@ export const useFileSelector = ({
 
   const onRemoveFile = useCustomCallback(
     (index: number) => {
-      const updatedValidFiles = validFiles.filter((_: FileData, i: number) => i !== index);
+      //
+      const updatedValidFiles = validFiles.reduce((acc, file: FileData, i: number) => {
+        if (i === index) {
+          clearBlobFromMemory(file.url);
+        } else {
+          acc.push(file);
+        }
+        return acc;
+      }, [] as FileData[]);
+
       SetValidFiles(updatedValidFiles);
     },
     [validFiles],
@@ -172,6 +182,13 @@ export const useFileSelector = ({
     }, 200);
   }, []);
 
+  const clearBlobs = useCustomCallback(() => {
+    //Remove any blobs created in memory
+    validFiles.forEach(({ url }) => {
+      clearBlobFromMemory(url);
+    });
+  }, [validFiles]);
+
   const FileSelectorRef = useRef(() => (
     <FileSelector
       onChange={onInputChange}
@@ -193,6 +210,7 @@ export const useFileSelector = ({
     onCancel,
     onIdChange,
     onRemoveFile,
+    clearBlobs,
 
     //Errors
     maxUploadError: maxUploadErrorRef.current,
