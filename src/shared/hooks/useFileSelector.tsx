@@ -211,6 +211,7 @@ export const useFileSelector = ({
     onIdChange,
     onRemoveFile,
     clearBlobs,
+    clearBlob: clearBlobFromMemory,
 
     //Errors
     maxUploadError: maxUploadErrorRef.current,
