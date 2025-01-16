@@ -26,7 +26,7 @@ export const FileSelector = ({
   });
 
   //Css classes
-  const inputClassesRef = useRef<string>(`hidden ${inputClassName ?? ""}`);
+  const inputClassesRef = useRef<string>(`hiddenInput ${inputClassName ?? ""}`);
 
   const clickableAreaClassNameRef = useRef<string>(
     `${clickableAreaClassName ?? "dropzone border-dashed border-2 border-silver-600 p-4 rounded-md text-center cursor-pointer bg-inherit  hover:border-yellow-400 text-white font-bold py-2 px-4"}`,
