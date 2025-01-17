@@ -39,7 +39,7 @@ export const FileSelector = ({
     `${dropZoneWrapperClassName ?? "p-4 border border-gray-300 rounded-md shadow-md"}`,
   );
 
-  const messageParagraphClassNameRef = useRef<string>(`${messageParagraphClassName ?? "text-silver-600"}`);
+  const messageParagraphClassNameRef = useRef<string>(`${messageParagraphClassName ?? "text-center text-silver-600"}`);
 
   const messageParagraphRef = useRef<string>(
     `${messageParagraph ?? "Drag 'n' drop some files here, or click to select files"}`,
