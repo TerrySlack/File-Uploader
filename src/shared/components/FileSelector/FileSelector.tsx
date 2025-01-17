@@ -2,8 +2,11 @@ import { RefCallback, useEffect, useRef, MouseEvent } from "react";
 import { FileSelectorProps } from "../../types/types";
 
 import "./tailwind.css";
+const defaultAcceptTypes =
+  ".png, .jpg, .jpeg, .pdf, .svg, image/svg+xml, application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document";
 export const FileSelector = ({
   inputId,
+  acceptTypes,
   messageParagraph,
   inputClassName,
   clickableAreaClassName,
@@ -78,7 +81,7 @@ export const FileSelector = ({
         type="file"
         className={inputClassesRef.current}
         onChange={onChange}
-        accept=".png, .jpg, .jpeg, .pdf, .svg, image/svg+xml, application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+        accept={acceptTypes ?? defaultAcceptTypes}
         multiple
       />
     </div>

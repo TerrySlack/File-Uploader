@@ -13,7 +13,7 @@ export const defaultTypeExtensions: Record<string, string> = {
 //This is the attribute that should be present in all svg files
 const xmlns = "<svg xmlns='http://www.w3.org/2000/svg' ";
 export const maximumUploadCount = 30;
-export const maximumFileSize = 1e6; //5e6; //5 mb's
+export const maximumFileSize = 5e6; //5 mb's
 export const printableMaximumFileSize = "5 Megabytes";
 
 export const isValidFileType = (file: File, acceptedTypes = defaultTypeExtensions) => Boolean(acceptedTypes[file.type]);

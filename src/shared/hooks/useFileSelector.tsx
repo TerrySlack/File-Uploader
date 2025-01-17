@@ -16,6 +16,7 @@ import { useCustomCallback } from "./useCustomCallback";
 import { FileSelector } from "../components/FileSelector";
 
 export const useFileSelector = ({
+  acceptTypes,
   maximumUploadCount = maxUploadCount,
   maximumFileSize = maxFileSize,
   acceptedTypes = defaultTypeExtensions,
@@ -191,6 +192,7 @@ export const useFileSelector = ({
 
   const FileSelectorRef = useRef(() => (
     <FileSelector
+      acceptTypes={acceptTypes}
       onChange={onInputChange}
       onDragOver={onDragOver}
       onDrop={onDrop}

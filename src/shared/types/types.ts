@@ -2,6 +2,7 @@ import { ChangeEvent, DragEvent } from "react";
 
 export interface FileSelectorProps {
   inputId?: string;
+  acceptTypes?: string;
   messageParagraph?: string;
   inputClassName?: string;
   clickableAreaClassName?: string;
@@ -16,6 +17,7 @@ export interface FileSelectorProps {
 
 //Incoming Props
 export interface IFileUploaderProps {
+  acceptTypes?: string;
   maximumUploadCount?: number;
   maximumFileSize?: number;
   acceptedTypes?: Record<string, string>;
