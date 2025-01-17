@@ -10,7 +10,7 @@ yarn @mainframework/dropzone
 `Hook config properties`
 {
 maximumUploadCount:5, //Defaults to 30
-maximumFileSize = maxFileSize, //Defaults to 10 mb's
+maximumFileSize = maxFileSize, //Defaults to 5 mb's
 acceptedTypes = defaultTypeExtensions, //See the default extensions above
 }
 
@@ -68,8 +68,9 @@ export const defaultTypeExtensions: Record<string, string> = {
 ```JS | TS
 //Here you can set the following properties for the FileSelector.  These are all optional
  const { validFiles, onIdChange, onCancel, onRemoveFile, FileSelector } = useFileSelector({
+  acceptTypes: ".png" //Defaults to ".png, .jpg, .jpeg, .pdf, .svg, image/svg+xml, application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document"
   maximumUploadCount:5,  //Defaults to 30
-  maximumFileSize = maxFileSize,  //Defaults to 10 mb's
+  maximumFileSize = 5e6,  //Defaults to 5 mb's
   acceptedTypes = defaultTypeExtensions,  //See the default extensions above
 });
 
